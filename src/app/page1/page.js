@@ -67,7 +67,7 @@ export default function Page1() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {Array.from({ length: 9 }, (_, index) => (
               <div key={index} className="flex items-center space-x-3 p-3 border rounded-lg bg-gray-50">
-                <span className="text-lg font-semibold text-gray-600 w-6">
+                <span className="text-lg font-semibold text-black w-6">
                   {index + 1}
                 </span>
                 <input
@@ -75,7 +75,7 @@ export default function Page1() {
                   value={playerNames[index]}
                   onChange={(e) => handleNameChange(index, e.target.value)}
                   placeholder={String(index + 1) + '号'}
-                  className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black"
                 />
               </div>
             ))}
