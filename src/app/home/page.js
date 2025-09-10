@@ -7,10 +7,19 @@ export default function HomePage() {
   const router = useRouter();
   const [players, setPlayers] = useState(Array.from({ length: 9 }, (_, i) => String(i + 1) + '号'));
   const [roles, setRoles] = useState({});
+  const [roleConfig, setRoleConfig] = useState({
+    狼人: 3,
+    预言家: 1,
+    女巫: 1,
+    猎人: 0,
+    守卫: 0,
+    平民: 4
+  });
 
   useEffect(() => {
     const savedPlayers = localStorage.getItem('players');
     const savedRoles = localStorage.getItem('roles');
+    const savedRoleConfig = localStorage.getItem('roleConfig');
     
     if (savedPlayers) {
       setPlayers(JSON.parse(savedPlayers));
@@ -21,20 +30,29 @@ export default function HomePage() {
     if (savedRoles) {
       setRoles(JSON.parse(savedRoles));
     }
+    
+    if (savedRoleConfig) {
+      setRoleConfig(JSON.parse(savedRoleConfig));
+    }
   }, []);
 
   const assignRoles = () => {
-    const roleConfig = [
-      { name: '狼人', count: 3, image: '/狼人.jpg' },
-      { name: '预言家', count: 1, image: '/预言家.jpg' },
-      { name: '女巫', count: 1, image: '/女巫.jpg' },
-      { name: '平民', count: 4, image: '/平民.jpg' }
-    ];
+    const roleImageMap = {
+      '狼人': '/狼人.jpg',
+      '预言家': '/预言家.jpg',
+      '女巫': '/女巫.jpg',
+      '平民': '/平民.jpg',
+      '猎人': '/猎人.jpg',
+      '守卫': '/守卫.jpg'
+    };
 
     const allRoles = [];
-    roleConfig.forEach(role => {
-      for (let i = 0; i < role.count; i++) {
-        allRoles.push(role);
+    Object.entries(roleConfig).forEach(([roleName, count]) => {
+      for (let i = 0; i < count; i++) {
+        allRoles.push({
+          name: roleName,
+          image: roleImageMap[roleName]
+        });
       }
     });
 
